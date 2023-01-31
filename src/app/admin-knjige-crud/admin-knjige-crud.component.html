@@ -1,0 +1,241 @@
+<div class="container mt-5">
+
+    <div class="row height d-flex justify-content-center align-items-center">
+
+        <div class="col-md-8">
+            <form [formGroup]="forma">
+                <div class="search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" class="form-control" placeholder="Ime pisca, naziv knjige ili opis knjige"
+                        [formControl]="$any(forma.controls['kriterijum'])">
+                    <button class="btn btn-danger" (click)="pretrazi()" [disabled]="!forma.valid">Search</button>
+                </div>
+            </form>
+        </div>
+
+
+        <ul class="nav justify-content-center mt-3">
+            <li class="nav-item">
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal"
+                    data-target="#dodavanjeKnjige" (click)="getSveKategorije()">Dodaj novu knjigu</button>
+            </li>
+            <li class="nav-item ml-2">
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#dodavanjeKategorije">Dodaj novu kategoriju</button>
+            </li>
+        </ul>
+    </div>
+
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div *ngFor="let knjiga of listaKnjiga" class="col mb-5">
+                    <app-admin-knjiga-mala (slanjeKnjige)="popuniPolja($event)" [knjiga]="knjiga"></app-admin-knjiga-mala>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <div class="modal fade" id="dodavanjeKnjige" tabindex="-1" role="dialog" aria-labelledby="dodavanjeKnjige"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="cancelForma" class="close d-flex align-items-center justify-content-center"
+                        data-dismiss="modal" aria-label="Close">X
+                        <span aria-hidden="true" class="ion-ios-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body p-4 p-md-5">
+                    <h3 class="text-center mb-4 text-primary">Dodavanje nove knjige</h3>
+                    <form [formGroup]="dodavanjeKnjigeForma" class="login-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Naziv knjige"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['naziv'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['naziv'].touched && !dodavanjeKnjigeForma.controls['naziv'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Autor"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['autor'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['autor'].touched && !dodavanjeKnjigeForma.controls['autor'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control rounded-left"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['kategorijeId'])">
+                                
+                                    <option *ngFor="let kategorija of listaKategorija" id="{{kategorija.id}}" value="{{kategorija.id}}">{{kategorija.kategorija}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control rounded-left"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['opis'])" rows="2"></textarea>
+                            <div *ngIf="dodavanjeKnjigeForma.controls['opis'].touched && !dodavanjeKnjigeForma.controls['opis'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Pismo"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['pismo'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['pismo'].touched && !dodavanjeKnjigeForma.controls['pismo'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Povez"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['povez'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['povez'].touched && !dodavanjeKnjigeForma.controls['povez'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Broj strana"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['strana'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['strana'].touched && !dodavanjeKnjigeForma.controls['strana'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Stanje"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['stanje'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['stanje'].touched && !dodavanjeKnjigeForma.controls['stanje'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Url slike"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['slikaUrl'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['slikaUrl'].touched && !dodavanjeKnjigeForma.controls['slikaUrl'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Cena"
+                                [formControl]="$any(dodavanjeKnjigeForma.controls['cena'])">
+                            <div *ngIf="dodavanjeKnjigeForma.controls['cena'].touched && !dodavanjeKnjigeForma.controls['cena'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary rounded px-3"
+                                [disabled]="!dodavanjeKnjigeForma.valid" (click)="dodajKnjigu()">Dodaj knjigu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="dodavanjeKategorije" tabindex="-1" role="dialog" aria-labelledby="dodavanjeKategorije"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="cancelKategorija" class="close d-flex align-items-center justify-content-center"
+                        data-dismiss="modal" aria-label="Close">X
+                        <span aria-hidden="true" class="ion-ios-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body p-4 p-md-5">
+                    <h3 class="text-center mb-4 text-primary">Dodavanje nove kategorije</h3>
+                    <form [formGroup]="dodavanjeKategorijeForma" class="login-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Naziv kategorije"
+                                [formControl]="$any(dodavanjeKategorijeForma.controls['kategorija'])">
+                            <div *ngIf="dodavanjeKategorijeForma.controls['kategorija'].touched && !dodavanjeKategorijeForma.controls['kategorija'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary rounded px-3"
+                                [disabled]="!dodavanjeKategorijeForma.valid" (click)="dodajKategoriju()">Dodaj kategoriju</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div #izmenaModal class="modal fade" id="izmenaKnjige" tabindex="-1" role="dialog" aria-labelledby="izmenaKnjige"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" id="cancelIzmena" class="close d-flex align-items-center justify-content-center"
+                        data-dismiss="modal" aria-label="Close" (click)="ugasiModal()">X
+                        <span aria-hidden="true" class="ion-ios-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body p-4 p-md-5">
+                    <h3 class="text-center mb-4 text-primary">Izmena knjige</h3>
+                    <h3 class="text-center mb-4 text-primary"></h3>
+                    <form [formGroup]="izmenaKnjigeForma" class="login-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Naziv knjige"
+                                [formControl]="$any(izmenaKnjigeForma.controls['naziv'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['naziv'].touched && !izmenaKnjigeForma.controls['naziv'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Autor"
+                                [formControl]="$any(izmenaKnjigeForma.controls['autor'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['autor'].touched && !izmenaKnjigeForma.controls['autor'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control rounded-left"
+                                [formControl]="$any(izmenaKnjigeForma.controls['kategorijeId'])">
+                                
+                                    <option *ngFor="let kategorija of listaKategorija" id="{{kategorija.id}}" value="{{kategorija.id}}">{{kategorija.kategorija}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control rounded-left"
+                                [formControl]="$any(izmenaKnjigeForma.controls['opis'])" rows="2"></textarea>
+                            <div *ngIf="izmenaKnjigeForma.controls['opis'].touched && !izmenaKnjigeForma.controls['opis'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Pismo"
+                                [formControl]="$any(izmenaKnjigeForma.controls['pismo'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['pismo'].touched && !izmenaKnjigeForma.controls['pismo'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Povez"
+                                [formControl]="$any(izmenaKnjigeForma.controls['povez'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['povez'].touched && !izmenaKnjigeForma.controls['povez'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Broj strana"
+                                [formControl]="$any(izmenaKnjigeForma.controls['strana'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['strana'].touched && !izmenaKnjigeForma.controls['strana'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Stanje"
+                                [formControl]="$any(izmenaKnjigeForma.controls['stanje'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['stanje'].touched && !izmenaKnjigeForma.controls['stanje'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control rounded-left" placeholder="Url slike"
+                                [formControl]="$any(izmenaKnjigeForma.controls['slikaUrl'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['slikaUrl'].touched && !izmenaKnjigeForma.controls['slikaUrl'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control rounded-left" placeholder="Cena"
+                                [formControl]="$any(izmenaKnjigeForma.controls['cena'])">
+                            <div *ngIf="izmenaKnjigeForma.controls['cena'].touched && !izmenaKnjigeForma.controls['cena'].valid"
+                                class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary rounded px-3"
+                                [disabled]="!izmenaKnjigeForma.valid" (click)="izmeniKnjigu()">Potvrdi izmenu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

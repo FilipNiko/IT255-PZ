@@ -20,7 +20,7 @@ export class NavigationComponent {
   korpaUnosi$: Observable<GrupaKnjiga[]>
   listaKategorija: Kategorija[];
 
-  constructor(private crudService: CrudServiceService, private store:Store){
+  constructor(private crudService: CrudServiceService, private store: Store, private authService: AuthService) {
     this.korpaUnosi$ = store.select(selectGrupovaneKnjige);
     this.brojKnjigaUKorpi$ = store.select(selectBrojKnjiga);
   }
@@ -29,15 +29,15 @@ export class NavigationComponent {
     this.getSveKategorije();
   }
 
-  proveriUneteKnjige(){
-    this.korpaUnosi$.forEach(grupaKnjiga => grupaKnjiga.forEach(knjiga=>{
-     if(knjiga.broj>knjiga.knjiga.stanje){
-        this.smanjiPrimerke(knjiga);  
-     }
+  proveriUneteKnjige() {
+    this.korpaUnosi$.forEach(grupaKnjiga => grupaKnjiga.forEach(knjiga => {
+      if (knjiga.broj > knjiga.knjiga.stanje) {
+        this.smanjiPrimerke(knjiga);
+      }
     }))
-   }
+  }
 
-   smanjiPrimerke(grupaKnjiga: GrupaKnjiga) {
+  smanjiPrimerke(grupaKnjiga: GrupaKnjiga) {
     this.store.dispatch(izbrisiKnjigu(grupaKnjiga.knjiga));
 
   }
@@ -46,10 +46,12 @@ export class NavigationComponent {
     this.crudService.getSveKategorije().subscribe((data) => {
       this.listaKategorija = data;
     })
-
-
   }
-  
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
 
 
 }

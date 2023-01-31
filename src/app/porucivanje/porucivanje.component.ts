@@ -53,7 +53,7 @@ export class PorucivanjeComponent {
     let danasnjiDatum = formatDate(new Date(), 'yyyy/MM/dd', 'en');
     let korisniciId = this.authService.getIdKorisnika();
 
-    this.crudService.upisiPorudzbinu(new Porudzbina(korisniciId, danasnjiDatum, ime, prezime, grad, adresa, zip, brTelefona)).subscribe((data) => {
+    this.crudService.upisiPorudzbinu(new Porudzbina(korisniciId, danasnjiDatum, ime, prezime, grad, adresa, zip, brTelefona, "Kreirana")).subscribe((data) => {
       alert("Uspešno ste se izvršili naručivanje!");
       this.porudzbine.unshift(data);
       this.upisiStavkePorudzbine(this.porudzbine[0].id);

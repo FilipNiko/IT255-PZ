@@ -7,8 +7,9 @@
             <div class="col-md-6">
                 <h5 class=" mb-1 ">Kategorija: {{knjiga.kategorija}}</h5>
                 <h1 class="display-5 fw-bolder">{{knjiga.naziv}}</h1>
+                <h5 class="fw-bolder text-muted">Autor: {{knjiga.autor}}</h5>
                 <div class="fs-5 mb-5">
-                    <span class="display-6 text-danger">$40.00</span>
+                    <span class="display-6 text-danger">{{knjiga.cena}} RSD</span>
                     <h5 class=" mb-1 mt-2 text-success" *ngIf="knjiga.stanje!=0" >Na stanju</h5>
                     <h5 class=" mb-1 mt-2 text-warning" *ngIf="knjiga.stanje==0">Van stanja</h5>
                 </div>
@@ -20,9 +21,9 @@
                 <h5 class=" mb-4 text-muted">Broj strana: {{knjiga.strana}}</h5>
 
                 <div class="d-flex">
-                    <button class="btn btn-outline-danger flex-shrink-0" type="button" [disabled]="knjiga.stanje==0">
+                    <button class="btn btn-outline-danger flex-shrink-0" type="button" [disabled]="knjiga.stanje==0" (click)="dodajUKorpu()">
                         <i class="bi-cart-fill me-1"></i>
-                        Add to cart
+                        Dodaj u korpu
                     </button>
                 </div>
             </div>

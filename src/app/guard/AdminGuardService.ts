@@ -7,13 +7,13 @@ import {
 import { AuthService } from './AuthService';
 
 @Injectable()
-export class LoggedInGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
     constructor(private authService: AuthService) {}
-    
+
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):boolean {
-        const isLoggedIn = this.authService.isLoggedIn();
-        console.log('canActivate', isLoggedIn);
-        return isLoggedIn;
+        const isAdmin = this.authService.isAdmin();
+        console.log('canActivate', isAdmin);
+        return isAdmin;
     }
 }

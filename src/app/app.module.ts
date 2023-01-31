@@ -20,6 +20,12 @@ import { KorpaComponent } from './korpa/korpa.component';
 import { StoreModule } from '@ngrx/store';
 import { korpaReducer, metaReducerLocalStorage } from './korpa-state/korpa.reducer';
 import { PorucivanjeComponent } from './porucivanje/porucivanje.component';
+import { AdminKnjigeCrudComponent } from './admin-knjige-crud/admin-knjige-crud.component';
+import { AdminGuard } from './guard/AdminGuardService';
+import { AdminKnjigaMalaComponent } from './admin-knjiga-mala/admin-knjiga-mala.component';
+import { AdminPorudzbineComponent } from './admin-porudzbine/admin-porudzbine.component';
+import { AdminPorudzbinaDetaljiComponent } from './admin-porudzbina-detalji/admin-porudzbina-detalji.component';
+import { AdminPorudzbineKorisnikaComponent } from './admin-porudzbine-korisnika/admin-porudzbine-korisnika.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +40,11 @@ import { PorucivanjeComponent } from './porucivanje/porucivanje.component';
     KategorijaKnjigeComponent,
     KorpaComponent,
     PorucivanjeComponent,
+    AdminKnjigeCrudComponent,
+    AdminKnjigaMalaComponent,
+    AdminPorudzbineComponent,
+    AdminPorudzbinaDetaljiComponent,
+    AdminPorudzbineKorisnikaComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +53,7 @@ import { PorucivanjeComponent } from './porucivanje/porucivanje.component';
     HttpClientModule,
     StoreModule.forRoot({korpaUnosi: korpaReducer}, { metaReducers: [ metaReducerLocalStorage ] })
   ],
-  providers: [CrudServiceService, LoggedInGuard, AuthService],
+  providers: [CrudServiceService, LoggedInGuard, AuthService, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

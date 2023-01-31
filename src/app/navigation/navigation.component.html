@@ -15,6 +15,8 @@
                         </span>
                     </ul>
                 </li>
+                <li *ngIf="isAdmin()" class="nav-item"><a class="nav-link yellow-hover" [routerLink]="['/adminKnjige']">Upravljanje knjigama</a></li>
+                <li *ngIf="isAdmin()" class="nav-item"><a class="nav-link yellow-hover" [routerLink]="['/adminPorudzbine']">Pregled porudzbina</a></li>
             </ul>
             <div class="d-flex">
                 <button class="btn btn-outline-dark" [routerLink]="['/korpa']" [disabled]="(brojKnjigaUKorpi$ | async)==0" (click)="proveriUneteKnjige()" type="submit" >

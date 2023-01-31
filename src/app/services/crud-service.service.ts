@@ -30,9 +30,16 @@ export class CrudServiceService {
         this.createKorisnik(item))
       ))
   }
-  
-  getPoUsername(username: string):Observable<Korisnik[]>{
+
+  getPoUsername(username: string): Observable<Korisnik[]> {
     return this.http.get<any>("http://localhost:3000/korisnici?username=" + username)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createKorisnik(item))
+      ))
+  }
+
+  getKorisnikPoId(id:number): Observable<Korisnik[]> {
+    return this.http.get<any>("http://localhost:3000/korisnici?id=" + id)
       .pipe(map((data: any) => data.map((item: any) =>
         this.createKorisnik(item))
       ))
@@ -43,7 +50,7 @@ export class CrudServiceService {
 
 
   getKnjigeZaPocetnu(): Observable<Knjiga[]> {
-    return this.http.get<any>("http://localhost:3000/knjige?_limit=20")
+    return this.http.get<any>("http://localhost:3000/knjige?_limit=4")
       .pipe(map((data: any) => data.map((item: any) =>
         this.createKnjige(item))
       ))
@@ -56,7 +63,7 @@ export class CrudServiceService {
       ))
   }
 
-  pretraziKnjige(kriterijum : string): Observable<Knjiga[]> {
+  pretraziKnjige(kriterijum: string): Observable<Knjiga[]> {
     return this.http.get<any>("http://localhost:3000/knjige?q=" + kriterijum)
       .pipe(map((data: any) => data.map((item: any) =>
         this.createKnjige(item))
@@ -70,13 +77,34 @@ export class CrudServiceService {
         this.createKnjige(item))
       ))
   }
+  
 
-  updateKnjiga(novaKnjiga: any, id: number) : Observable<Knjiga> {
+  updateKnjiga(novaKnjiga: any, id: number): Observable<Knjiga> {
     return this.http.put<any>("http://localhost:3000/knjige/" + id, novaKnjiga)
+      .pipe(map((data: any) => this.createKnjige(data)))
+  }
+
+  dodajKnjigu(knjiga: Knjiga): Observable<Knjiga> {
+    return this.http.post("http://localhost:3000/knjige", knjiga)
+      .pipe(map((data: any) => this.createKnjige(data)),)
+  }
+
+  deleteKnjiga(id: number) : Observable<Knjiga> {
+    return this.http.delete<any>("http://localhost:3000/knjige/" + id)
     .pipe(map((data: any) => this.createKnjige(data)))
   }
- 
 
+  izmeniKnjigu(data:any, id: number) : Observable<Knjiga> {
+    return this.http.put<any>("http://localhost:3000/knjige/" + id, data)
+    .pipe(map((data: any) => this.createKnjige(data)))
+  }
+
+  getKnjigaPoId(id: number) : Observable<Knjiga[]> {
+    return this.http.get<any>("http://localhost:3000/knjige?id=" + id)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createKnjige(item))
+      ))
+  }
 
 
 
@@ -115,6 +143,17 @@ export class CrudServiceService {
       ))
   }
 
+  dodajKategoriju(kategorija: Kategorija): Observable<Kategorija> {
+    return this.http.post("http://localhost:3000/kategorije", kategorija)
+      .pipe(map((data: any) => this.createKategorija(data)),)
+  }
+
+ 
+
+
+
+
+
 
 
   upisiPorudzbinu(porudzbina: Porudzbina): Observable<Porudzbina> {
@@ -128,7 +167,48 @@ export class CrudServiceService {
   }
 
 
-  
+  getSvePorudzbine(): Observable<Porudzbina[]> {
+    return this.http.get<any>("http://localhost:3000/porudzbine?_sort=datumKreiranja&_order=desc")
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createPorudzbina(item))
+      ))
+  }
+
+  izmeniPorudzbinu(data:any, id: number) : Observable<Porudzbina> {
+    return this.http.put<any>("http://localhost:3000/porudzbine/" + id, data)
+    .pipe(map((data: any) => this.createPorudzbina(data)))
+  }
+
+  pretraziPorudzbine(kriterijum: string): Observable<Porudzbina[]> {
+    return this.http.get<any>("http://localhost:3000/porudzbine?q=" + kriterijum)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createPorudzbina(item))
+      ))
+  }
+
+  getPorudzbinaPoId(id:number): Observable<Porudzbina[]> {
+    return this.http.get<any>("http://localhost:3000/porudzbine?id=" + id)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createPorudzbina(item))
+      ))
+  }
+
+  getStavkeIzPorudzbine(id:number): Observable<Stavka[]> {
+    return this.http.get<any>("http://localhost:3000/stavke?porudzbineId=" + id)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createStavka(item))
+
+      ))
+  }
+
+  getPorudzbinePoKorisniku(id:number): Observable<Porudzbina[]> {
+    return this.http.get<any>("http://localhost:3000/porudzbine?korisniciId=" + id)
+      .pipe(map((data: any) => data.map((item: any) =>
+        this.createPorudzbina(item))
+      ))
+  }
+
+
 
 
 
@@ -167,7 +247,7 @@ export class CrudServiceService {
 
 
   createPorudzbina(item: any): Porudzbina {
-    let porudzbina = new Porudzbina(item.korisniciId, item.datumKreiranja, item.ime, item.prezime, item.grad, item.adresa, item.zip, item.brTelefona)
+    let porudzbina = new Porudzbina(item.korisniciId, item.datumKreiranja, item.ime, item.prezime, item.grad, item.adresa, item.zip, item.brTelefona, item.status)
     porudzbina.id = item.id;
     console.log(porudzbina.id);
     return porudzbina;

@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!"><b><span class="text-danger"> El</span> libro</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link yellow-hover" [routerLink]="['/knjige']">Početna</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Kategorije</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" [routerLink]="['/ponuda']" >Sve knjige</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <span *ngFor="let kategorija of listaKategorija">
+                            <li><a class="dropdown-item" [routerLink]="['/ponuda', kategorija.id]">{{kategorija.kategorija}}</a></li>
+                        </span>
+                    </ul>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <button class="btn btn-outline-dark" [routerLink]="['/korpa']" [disabled]="(brojKnjigaUKorpi$ | async)==0" (click)="proveriUneteKnjige()" type="submit" >
+                    <i class="bi-cart-fill me-1"></i>
+                    Korpa
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">{{brojKnjigaUKorpi$ | async}}</span>
+                </button>
+
+                <app-login></app-login>
+                
+            </div>
+
+            
+        </div>
+    </div>
+</nav>

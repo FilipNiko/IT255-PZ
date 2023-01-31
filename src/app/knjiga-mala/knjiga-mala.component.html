@@ -1,0 +1,18 @@
+
+<div class="card h-100">
+        <img class="card-img-top" src={{knjiga.slikaUrl}} alt={{knjiga.naziv}} />
+        <div class="card-body p-4">
+            <div class="text-center">
+                <h5 class="fw-bolder">{{knjiga.naziv}}</h5>
+                <span class="text-danger"><strong>{{knjiga.cena}} RSD</strong></span>
+            </div>
+        </div>
+
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a [routerLink]="['/knjige', knjiga.id]" class="btn btn-outline-dark mt-auto mb-1">Saznaj
+                    više</a>
+                <button class="btn btn-outline-danger mt-auto" (click)="dodajUKorpu()" [disabled]="knjiga.stanje==0">Dodaj u korpu</button>
+            </div>
+        </div>
+    </div>

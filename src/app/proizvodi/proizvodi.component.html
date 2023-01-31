@@ -1,0 +1,11 @@
+<app-header [naziv]="pocetna" ></app-header>
+<h1 class="text-dark mt-3 text-center">Preporučene knjige</h1>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div *ngFor="let knjiga of listaKnjiga" class="col mb-5">
+                <app-knjiga-mala [knjiga]="knjiga"></app-knjiga-mala>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,134 @@
+{
+  "korisnici": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "admin": true
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "email": "user@gmail.com",
+      "password": "user",
+      "admin": false
+    },
+    {
+      "username": "pera",
+      "email": "pera@gmail.com",
+      "password": "pera",
+      "admin": false,
+      "id": 9
+    },
+    {
+      "username": "filip1",
+      "email": "filip@gmail.com",
+      "password": "filip",
+      "admin": false,
+      "id": 10
+    }
+  ],
+  "kategorije": [
+    {
+      "id": 1,
+      "kategorija": "Romani"
+    },
+    {
+      "id": 2,
+      "kategorija": "Pripovetke"
+    },
+    {
+      "id": 3,
+      "kategorija": "Ljubavni Romani"
+    },
+    {
+      "id": 4,
+      "kategorija": "Akcija/Avantura"
+    },
+    {
+      "id": 5,
+      "kategorija": "Trileri/Misterije"
+    },
+    {
+      "id": 6,
+      "kategorija": "Komedije"
+    },
+    {
+      "id": 7,
+      "kategorija": "Istorijski Romani"
+    },
+    {
+      "id": 8,
+      "kategorija": "Fantastika"
+    },
+    {
+      "id": 9,
+      "kategorija": "Horrori"
+    }
+  ],
+  "knjige": [
+    {
+      "naziv": "PARAZIT",
+      "opis": "Artur Konan Dojl je često koristio zastrašujuće elemente u svojim detektivskim pričama – npr. u Baskervilskom psu – ali, u racionalnom svetu u kojem se sve misterije mogu objasniti, ove elemente jasno ne treba shvatiti ozbiljno. Međutim, čitaoci horora setiće se da je Dojl napisao brojne priče strave u kojima svet nije racionalan, misterija se ne može objasniti, a ono što je zastrašujuće i natprirodno vlada trijumfalno.",
+      "pismo": "latinica",
+      "povez": "tvrd",
+      "strana": 286,
+      "stanje": 9,
+      "slikaUrl": "https://www.knjizare-vulkan.rs/files/watermark/files/images/slike_proizvoda/thumbs_w/366891_w.jpg",
+      "kategorijeId": 9,
+      "cena": 1079,
+      "id": 1
+    },
+    {
+      "naziv": "POSLEDNJE PREŽIVELE",
+      "opis": "Uzbudljiv roman strave i užasa koji prati grupu junakinja na ivici smrti, od sjajnog autora „Njujork tajmsovog” bestselera The Southern Book Club’s Guide to Slaying Vampires. U filmovima strave i užasa, finalna devojka je ona koja živa dočeka odjavnu špicu. Ona koja je uzvratila, pobedila ubicu i osvetila svoje prijatelje. Ona koja, iako ranjena, izlazi kao pobednica. Ali šta se dešava s njom kad se zvuk sirena izgubi u daljini i publika nastavi sa svojim životom? ",
+      "pismo": "latinica",
+      "povez": "broš",
+      "strana": 312,
+      "stanje": 3,
+      "slikaUrl": "https://dereta.rs/cached/dereta.rs/Images/Poslednje-prezivele0-1000x0-0000129208251157.jpg",
+      "kategorijeId": 5,
+      "cena": 1149,
+      "id": 2
+    }
+  ],
+  "porudzbine": [
+    {
+      "id": 1,
+      "korisniciId": 1,
+      "datumKreiranja": "2023-01-30",
+      "ime": "Pera",
+      "prezime": "Peric",
+      "grad": "Beograd",
+      "adresa": "Adresa1",
+      "zip": 10000,
+      "brTelefona": 123456789
+    },
+    {
+      "id": 2,
+      "korisniciId": 1,
+      "datumKreiranja": "2023-01-30",
+      "ime": "Mare",
+      "prezime": "Maric",
+      "grad": "Beograd",
+      "adresa": "Adresa1",
+      "zip": 10000,
+      "brTelefona": 123456789
+    }
+  ],
+  "stavke": [
+    {
+      "id": 1,
+      "porudzbineId": 1,
+      "knjigeId": 2,
+      "brPrimeraka": 1
+    },
+    {
+      "id": 2,
+      "porudzbineId": 1,
+      "knjigeId": 1,
+      "brPrimeraka": 1
+    }
+  ]
+}

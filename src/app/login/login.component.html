@@ -1,0 +1,101 @@
+<button *ngIf="!daLiJeUlogovan()" class="ml-2 btn btn-outline-danger" type="button" data-toggle="modal" data-target="#ModalLogin">
+    <i class="bi bi-person-circle"></i>
+    Login
+</button>
+
+<button [routerLink]="['/knjige']" *ngIf="daLiJeUlogovan()" class="ml-2 btn btn-outline-danger" type="button" (click)="izlogujSe()">
+    <i class="bi bi-person-circle"></i>
+    Logout
+</button>
+
+
+
+<div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="ModalLogin" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="cancelLog" class="close d-flex align-items-center justify-content-center"
+                    data-dismiss="modal" aria-label="Close">X
+                    <span aria-hidden="true" class="ion-ios-close"></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 p-md-5">
+                <h3 class="text-center mb-4 text-primary">Login</h3>
+                <form [formGroup]="loginForma" class="login-form">
+                    <div *ngIf="greska"
+                            class="text-danger"><small>Pogrešan username ili password!</small></div>
+                    <div class="form-group">
+                        <input type="text" class="form-control rounded-left" placeholder="Username"
+                            [formControl]="$any(loginForma.controls['username'])">
+                            <div *ngIf="loginForma.controls['username'].touched && !loginForma.controls['username'].valid"
+                            class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control rounded-left" placeholder="Password"
+                            [formControl]="$any(loginForma.controls['password'])">
+                            <div *ngIf="loginForma.controls['password'].touched && !loginForma.controls['password'].valid"
+                            class="text-danger"><small>Polje ne može biti prazno!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary rounded px-3" [disabled]="!loginForma.valid"
+                            (click)="ulogujSe()">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <p>Nemate nalog? <a href="#" id="cancel" data-toggle="modal" data-target="#ModalRegistracija"
+                        data-dismiss="modal">Registrujte se</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="ModalRegistracija" tabindex="-1" role="dialog" aria-labelledby="ModalRegistracija"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="cancelReg" class="close d-flex align-items-center justify-content-center"
+                    data-dismiss="modal" aria-label="Close">X
+                    <span aria-hidden="true" class="ion-ios-close"></span>
+                </button>
+            </div>
+            <div class="modal-body p-4 p-md-5">
+                <h3 class="text-center mb-4 text-primary">Registracija</h3>
+                <form [formGroup]="registracijaForma" class="login-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control rounded-left" placeholder="Username"
+                            [formControl]="$any(registracijaForma.controls['username'])">
+                        <div *ngIf="registracijaForma.controls['username'].touched && !registracijaForma.controls['username'].valid"
+                            class="text-danger"><small>Username mora da ima minimalno 4 karaktera!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control rounded-left" placeholder="E-mail"
+                            [formControl]="$any(registracijaForma.controls['email'])">
+                            <div *ngIf="registracijaForma.controls['email'].touched && !registracijaForma.controls['email'].valid"
+                            class="text-danger"><small>E-mail mora biti u validnom formatu!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control rounded-left" placeholder="Password"
+                            [formControl]="$any(registracijaForma.controls['password'])">
+                            <div *ngIf="registracijaForma.controls['password'].touched && !registracijaForma.controls['password'].valid"
+                            class="text-danger"><small>Morate uneti password!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control rounded-left" placeholder="Ponovo Password"
+                            [formControl]="$any(registracijaForma.controls['repassword'])">
+                            <div *ngIf="registracijaForma.controls['repassword'].hasError('confirmedValidator')"
+                            class="text-danger"><small>Passwordi se moraju poklapati!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary rounded px-3"
+                            [disabled]="!registracijaForma.valid" (click)="registrujSe()">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

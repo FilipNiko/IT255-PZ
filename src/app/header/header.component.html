@@ -1,0 +1,10 @@
+<header class="py-5 bg-image" style="background-image: url('https://media.istockphoto.com/id/470721440/vector/books-seamless-pattern.jpg?s=612x612&w=0&k=20&c=SBWwuWALkou5kDTDq6_V7SGuBMJ4vxTK3y15B9ZSFDE=');">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+          
+            <h1 class="display-4 fw-bolder text-dark" *ngIf="naziv=='pocetna'"> <span class="text-danger">El</span> libro</h1>
+            <h1 class="display-4 fw-bolder headerText" *ngIf="naziv!='pocetna'">{{naziv}}</h1>
+            
+        </div>
+    </div>
+</header>

@@ -1,0 +1,43 @@
+<section class="py-5">
+    <h1 class="text-danger mt-3 text-center">Unos informacija za dostavu</h1>
+    <div class="container px-4 px-lg-5 mt-5">
+        <form [formGroup]="forma">
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" id="ime" class="form-control" [formControl]="$any(forma.controls['ime'])"/>
+                        <label class="form-label" for="ime">Ime</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" id="prezime" class="form-control" [formControl]="$any(forma.controls['prezime'])" />
+                        <label class="form-label" for="prezime">Prezime</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="text" id="grad" class="form-control" [formControl]="$any(forma.controls['grad'])" />
+                <label class="form-label" for="grad">Grad</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="text" id="adresa" class="form-control" [formControl]="$any(forma.controls['adresa'])" />
+                <label class="form-label" for="adresa">Adresa</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="number" id="zip" class="form-control" [formControl]="$any(forma.controls['zip'])"/>
+                <label class="form-label" for="zip">Poštanski broj</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="number" id="brTelefona" class="form-control" [formControl]="$any(forma.controls['brTelefona'])"/>
+                <label class="form-label" for="brTelefona">Broj telefona</label>
+            </div>
+
+            <button type="submit" [routerLink]="['/knjige']" class="btn btn-danger btn-block mb-4" [disabled]="!forma.valid" (click)="kreirajPorudzbinu()">Završi narudžbinu</button>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+<div class="container mt-5">
+
+    <div class="row height d-flex justify-content-center align-items-center">
+
+      <div class="col-md-8">
+        <form [formGroup]="forma">
+        <div class="search">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control" placeholder="Ime pisca, naziv knjige ili opis knjige" [formControl]="$any(forma.controls['kriterijum'])">
+          <button class="btn btn-danger" (click) = "pretrazi()" [disabled]="!forma.valid">Search</button>
+        </div>
+    </form>
+      
+    </div>
+</div>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div *ngFor="let knjiga of listaKnjiga" class="col mb-5">
+                <app-knjiga-mala [knjiga]="knjiga"></app-knjiga-mala>>
+            </div>
+        </div>
+    </div>
+</section>
